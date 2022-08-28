@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Hooks = () => {
     
@@ -59,15 +59,42 @@ const Hooks = () => {
     )
   }
 
+  function NewCar2(){
+    const [brand, setBrand] = useState("Ford");
+    const [model, setModel] = useState("Mustang");
+    const [year,  setMOdel] = useState("1964");
+    const [color, setColor] = useState("red");
+
+    return(
+      <>
+        <h1>My {brand}</h1>
+        <p>It is a {color} {model} from {year}</p>
+      </>
+    )
+  } 
+
+  function Timer() {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+      setTimeout(() => {
+        setCount((count) => count + 1);
+      }, 1000);
+    }, []);
+
+    return <h1>I've rendered {count} times!</h1>;
+  }
+
   return (
       <>
         {/* Home Page Content Section Start */}
         <div className="container">
           <div className="card">
             <div className="card-header">
-              <h3>React Hooks</h3>
+              <h3>React useState</h3>
             </div>
             <div className="card-body">
+              <NewCar2 />
               <NewCar />
               <Car />
               <FavoriteColor />
@@ -75,6 +102,15 @@ const Hooks = () => {
   
               <p style={{ color: "white", backgroundColor: "black", padding: "20px", borderRadius: "10px", border: "2px red solid"}}>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
   
+            </div>
+          </div>
+
+          <div className="card mt-3">
+            <div className="card-header">
+              <h3>React useEffect</h3>
+            </div>
+            <div className="card-body">
+                <Timer />
             </div>
           </div>
         </div>
