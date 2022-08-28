@@ -34,28 +34,28 @@ const Layout = () => {
       <div className="navber-section">
         <nav className="navbar navbar-expand-lg bg-light sticky-top">
           <div className="container">
-            <a className="navbar-brand" href="/">React App</a>
+            <Link to="/" className="navbar-brand">React App</Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <a className="nav-link" aria-current="page" href="/">Home</a>
+                  <Link to="/" className="nav-link" aria-current="page">Home</Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/blogs">Blogs</a>
+                  <Link to="/blogs" className="nav-link">Blogs</Link>
                 </li>
                 <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Pages
                   </a>
                   <ul className="dropdown-menu">
-                    <li><a className="dropdown-item" href="/hooks">React Hook</a></li>
+                    <li><Link to="/hooks" className="dropdown-item">React Hooks</Link></li>
                   </ul>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/contact">Contact</a>
+                  <Link to="/contact" className="nav-link">Contact</Link>
                 </li>
               </ul>
               <form className="d-flex" role="search">
