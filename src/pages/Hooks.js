@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Hooks = () => {
     
@@ -85,6 +85,22 @@ const Hooks = () => {
     return <h1>I've rendered {count} times!</h1>;
   }
 
+  function Form(){
+    const [inputValue, setInputValue] = useState("");
+    const count = useRef(0);
+
+    useEffect(() => {
+      count.current = count.current + 1;
+    });
+
+    return (
+      <>
+        <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+        <p>Render Count: {count.current}</p>
+      </>
+    );
+  }
+
   return (
       <>
         {/* Home Page Content Section Start */}
@@ -107,11 +123,20 @@ const Hooks = () => {
 
           <div className="card mt-3">
             <div className="card-header">
-              <h3>React useEffect</h3>
+              <h3>React useEffect, ... useRef</h3>
             </div>
             <div className="card-body">
+                ***Timer
                 <Timer />
+                <hr/>
+                ***useRef <br/>
+                <Form />
+                
+                <hr/>
+
+
             </div>
+
           </div>
         </div>
         {/* Home Page Content Section End */}
