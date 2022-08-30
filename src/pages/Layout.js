@@ -15,20 +15,6 @@ const Layout = () => {
 
   return (
     <>
-      {/* <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/blogs">Blogs</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact</Link>
-          </li>
-        </ul>
-      </nav> */}
-
       {/* Navbar Section Start */}
 
       <div className="navber-section">
@@ -52,6 +38,7 @@ const Layout = () => {
                   </a>
                   <ul className="dropdown-menu">
                     <li><Link to="/hooks" className="dropdown-item">React Hooks</Link></li>
+                    <li><Link to="/custom" className="dropdown-item">Custom Hooks</Link></li>
                   </ul>
                 </li>
                 <li className="nav-item">

@@ -8,6 +8,8 @@ import Blogs from './pages/Blogs';
 import Hooks from './pages/Hooks';
 import Contact from './pages/Contact';
 import NoPage from './pages/NoPage';
+import CustomHook from './pages/CustomHook';
+import Post from './pages/Post';
 import reportWebVitals from './reportWebVitals';
 
 export default function App() {
@@ -18,6 +20,8 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="blogs" element={<Blogs />} />
           <Route path="hooks" element={<Hooks />} />
+          <Route path="custom" element={<CustomHook />} />
+          <Route path="post/:id" element={<Post />} />
           <Route path="contact" element={<Contact />} />
           <Route path="*" element={<NoPage />} />
         </Route>
