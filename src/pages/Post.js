@@ -13,18 +13,26 @@ const Post = () => {
             .then((data) => setData(data));
     }, []);
 
+    function TagList(props) {
+        return <p className="d-inline">{props.tag}, </p>
+    }
+
     return ( data ?
         <>
             <div className="container">
-                            <div className="card">
-                                <div className="card-header">
-                                    {/* Post id: {params.id} */}
-                                    <h3>{data.title}</h3>
-                                </div>
-                                <div className="card-body">
-                                    {data.body}
-                                </div>
-                            </div>
+                <div className="card">
+                    <div className="card-header">
+                        {/* Post id: {params.id} */}
+                        <h3>{data.title}</h3>
+                    </div>
+                    <div className="card-body">
+                        {data.body}
+                        <div className="tags mt-3">
+                            <span className="h5">Tags: </span>
+                            {data.tags.map((tag) => <TagList tag={tag}/>)}
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     :<></>
@@ -34,4 +42,3 @@ const Post = () => {
 };
 
 export default Post;
-

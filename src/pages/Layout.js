@@ -37,6 +37,8 @@ const Layout = () => {
                     Pages
                   </a>
                   <ul className="dropdown-menu">
+                    <li><Link to="/employee" className="dropdown-item">Employee</Link></li>
+                    <li><Link to="/newemp" className="dropdown-item">Add Employee</Link></li>
                     <li><Link to="/hooks" className="dropdown-item">React Hooks</Link></li>
                     <li><Link to="/custom" className="dropdown-item">Custom Hooks</Link></li>
                   </ul>
