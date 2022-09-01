@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios'
+import Swal from 'sweetalert2';
 
 const Employee = () =>{
     const infoStyle = {
@@ -35,10 +37,49 @@ const Employee = () =>{
     const [data, setData] = useState(null);
 
     useEffect(() => {
-      fetch("http://127.0.0.1:8000/api/employeelist")
+      fetch("http://127.0.0.1:8000/api/employee")
         .then((res) => res.json())
         .then((data) => setData(data));
     }, []);
+
+    const fetchEmployee = async () => {
+        await axios.get(`http://localhost:8000/api/employee`).then(({data})=>{
+            setData(data)
+        })
+    }
+
+    const deleteEmployee = async (id) => {
+        console.log(id);
+        const isConfirm = await Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            return result.isConfirmed
+        });
+
+        if(!isConfirm){
+            return;
+          }
+
+          await axios.delete(`http://localhost:8000/api/employee/${id}`).then(({data})=>{
+            Swal.fire({
+                icon:"success",
+                text:data.message
+            })
+            fetchEmployee()
+          }).catch(({response:{data}})=>{
+            Swal.fire({
+                text:data.message,
+                icon:"error"
+            })
+          })
+
+    }
 
     return(
         <>
@@ -75,7 +116,7 @@ const Employee = () =>{
                                         return (
                                         <tr className="align-middle">
                                             <td>{item.id}</td>
-                                            <td><img src="https://www.chesadentalcare.com/assets/img/team/img1.jpg" className="border rounded-circle" alt="" style={{ height: "50px", width: "50px"}} /></td>
+                                            <td><img src="https://www.alhaimission.in/images/demo-user.png" className="border rounded-circle" alt="" style={{ height: "50px", width: "50px"}} /></td>
                                             <td>{item.name}</td>
                                             <td>{item.emp_id}</td>
                                             <td>{item.email}</td>
@@ -85,7 +126,7 @@ const Employee = () =>{
                                                 <div className="actions">
                                                     <Link to="#" ><i class="fas fa-info" style={infoStyle}></i></Link>
                                                     <Link to="#" ><i class="far fa-edit" style={editStyle}></i></Link>
-                                                    <Link to="#" ><i class="far fa-trash-alt" style={deleteStyle}></i></Link>
+                                                    <Link to="#" onClick={()=>deleteEmployee(item.id)}><i class="far fa-trash-alt" style={deleteStyle}></i></Link>
                                                 </div>
                                             </td>
                                         </tr>

@@ -12,7 +12,12 @@ const ReactAddEmp = () => {
     const [email, setEmail]     = useState("")
     const [dept, setDept]       = useState("")
     const [phone, setPhone]     = useState("")
+    const [image, setImage]     = useState()
     const [validationError,setValidationError] = useState({})
+
+    const changeHandler = (e) => {
+		setImage(e.target.files[0]);
+	};
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,8 +29,9 @@ const ReactAddEmp = () => {
         formData.append('email', email)
         formData.append('dept', dept)
         formData.append('phone', phone)
+        formData.append('image', image)
 
-        await axios.post(`http://127.0.0.1:8000/api/add-employee`, formData).then(({data})=>{
+        await axios.post(`http://127.0.0.1:8000/api/employee`, formData).then(({data})=>{
             Swal.fire({
                 title: "Employee successfully registered!",
                 icon: "success",
@@ -96,6 +102,10 @@ const ReactAddEmp = () => {
                                                 <label for="employeePhone" className="form-label">Phone Number</label>
                                                 <input type="text" className="form-control" value={phone} onChange={(e) => setPhone(e.target.value)} required />
                                             </div>
+                                            {/* <div className="mb-3">
+                                                <label for="employeePhone" className="form-label">Image</label>
+                                                <input type="file" className="form-control" value={image} onChange={changeHandler} required />
+                                            </div> */}
                                             <div className="form-text mb-2">If you already registered, <Link to="/employee">click here</Link></div>
                                             <button type="submit" className="btn btn-primary">Submit</button>
                                         </form>
