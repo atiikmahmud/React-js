@@ -1,43 +1,49 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios'
+import Swal from 'sweetalert2';
 
 const ReactAddEmp = () => {
 
-    const [name, setName]       = useState("");
-    const [emp_id, setEmpid]    = useState("");
-    const [email, setEmail]     = useState("");
-    const [dept, setDept]       = useState("");
-    const [phone, setPhone]     = useState("");
-    const [message, setMessage] = useState("");
+    const navigate = useNavigate();
+    
+    const [name, setName]       = useState("")
+    const [emp_id, setEmpid]    = useState("")
+    const [email, setEmail]     = useState("")
+    const [dept, setDept]       = useState("")
+    const [phone, setPhone]     = useState("")
+    const [validationError,setValidationError] = useState({})
 
-    let handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            let res = await fetch("http://127.0.0.1:8000/api/add-employee", {
-            method: "POST",
-            body: JSON.stringify({
-                name: name,
-                emp_id: emp_id,
-                email: email,
-                dept: dept,
-                phone: phone,
-             }),
-            });
-            let resJson = await res.json();
-            if (res.status === 200) {
-                setName("");
-                setEmpid("");
-                setEmail("");
-                setDept("");
-                setPhone("");
-                setMessage("Employee registred successfully!");
-            }  else {
-                setMessage("Some error occured");
+
+        const formData = new FormData()
+
+        formData.append('name', name)
+        formData.append('emp_id', emp_id)
+        formData.append('email', email)
+        formData.append('dept', dept)
+        formData.append('phone', phone)
+
+        await axios.post(`http://127.0.0.1:8000/api/add-employee`, formData).then(({data})=>{
+            Swal.fire({
+                title: "Employee successfully registered!",
+                icon: "success",
+                text: data.message
+            })
+            navigate("/employee")
+        }).catch(({response})=>{
+            if(response.status ===422){
+                setValidationError(response.data.errors)
+            }else{
+                Swal.fire({
+                    text:response.data.message,
+                    icon:"error"
+                }) 
             }
-        } catch (err) {
-            console.log(err);
-        }
-    };
+        })
+    }
+    
 
     return (
         <>
@@ -51,9 +57,25 @@ const ReactAddEmp = () => {
                                     Employee Registration
                                 </div>
                                 <div className="card-body">
+                                {
+                                    Object.keys(validationError).length > 0 && (
+                                        <div className="row">
+                                        <div className="col-12">
+                                            <div className="alert alert-danger">
+                                            <ul className="mb-0">
+                                                {
+                                                Object.entries(validationError).map(([key, value])=>(
+                                                    <li key={key}>{value}</li>   
+                                                ))
+                                                }
+                                            </ul>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    )
+                                    }
                                     <div className="reg-form">
                                         <form onSubmit={handleSubmit}>
-                                            <div className="message">{message ? <p>{message}</p> : null}</div>
                                             <div className="mb-3">
                                                 <label for="employeeName" className="form-label">Name</label>
                                                 <input type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} required />

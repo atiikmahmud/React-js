@@ -51,7 +51,7 @@ const Employee = () =>{
                                 Employee List
                                 </div>
                                 <div className="add-employee">
-                                    <Link to="/addemp" className="btn btn-dark"><i class="fas fa-plus-circle"></i> Add Employee</Link>
+                                    <Link to="/newemp" className="btn btn-dark"><i class="fas fa-plus-circle"></i> Add Employee</Link>
                                 </div>
                             </div>
                             <div className="card-body">
@@ -60,6 +60,7 @@ const Employee = () =>{
                                     <thead>
                                         <tr>
                                         <th scope="col">No.</th>
+                                        <th scope="col">Image</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Emp-ID</th>
                                         <th scope="col">Email</th>
@@ -74,6 +75,7 @@ const Employee = () =>{
                                         return (
                                         <tr className="align-middle">
                                             <td>{item.id}</td>
+                                            <td><img src="https://www.chesadentalcare.com/assets/img/team/img1.jpg" className="border rounded-circle" alt="" style={{ height: "50px", width: "50px"}} /></td>
                                             <td>{item.name}</td>
                                             <td>{item.emp_id}</td>
                                             <td>{item.email}</td>
