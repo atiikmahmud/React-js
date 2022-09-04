@@ -92,12 +92,12 @@ const Employee = () =>{
                                 Employee List
                                 </div>
                                 <div className="add-employee">
-                                    <Link to="/newemp" className="btn btn-dark"><i class="fas fa-plus-circle"></i> Add Employee</Link>
+                                    <Link to="/newemp" className="btn btn-dark"><i className="fas fa-plus-circle"></i> Add Employee</Link>
                                 </div>
                             </div>
                             <div className="card-body">
                                 <div className="employee-list-table">
-                                <table class="table table-hover VAMIDDLE">
+                                <table className="table table-hover">
                                     <thead>
                                         <tr>
                                         <th scope="col">No.</th>
@@ -124,9 +124,9 @@ const Employee = () =>{
                                             <td>{item.phone}</td>
                                             <td>
                                                 <div className="actions">
-                                                    <Link to="#" ><i class="fas fa-info" style={infoStyle}></i></Link>
-                                                    <Link to="#" ><i class="far fa-edit" style={editStyle}></i></Link>
-                                                    <Link to="#" onClick={()=>deleteEmployee(item.id)}><i class="far fa-trash-alt" style={deleteStyle}></i></Link>
+                                                    <Link to="#" ><i className="fas fa-info" style={infoStyle}></i></Link>
+                                                    <Link to="#" ><i className="far fa-edit" style={editStyle}></i></Link>
+                                                    <Link to="#" onClick={()=>deleteEmployee(item.id)}><i className="far fa-trash-alt" style={deleteStyle}></i></Link>
                                                 </div>
                                             </td>
                                         </tr>

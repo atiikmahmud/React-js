@@ -33,9 +33,7 @@ const Layout = () => {
                   <Link to="/blogs" className="nav-link">Blogs</Link>
                 </li>
                 <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Pages
-                  </a>
+                  <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
                   <ul className="dropdown-menu">
                     <li><Link to="/employee" className="dropdown-item">Employee</Link></li>
                     <li><Link to="/newemp" className="dropdown-item">Add Employee</Link></li>
